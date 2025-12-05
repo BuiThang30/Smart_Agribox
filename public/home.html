@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang = "vn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SMART AGRIBOX</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!--Navbar-->
+  <nav class="navbar">
+    <div class="logo">SMART AGRIBOX</div>
+    <div class="menu-toggle" id="mobile-menu">&#9776;</div>
+    <ul class="nav-links">
+      <li><a href="/home#" class="active">Trang chủ</a></li>
+      <li><a href="/home#control">Điều khiển</a></li>
+      <li><a href="/home#about">Giới thiệu</a></li>
+    </ul>
+  </nav>
+
+
+  <div class="sidebar" id="sidebar">
+    <div class="toggle-btn" id="toggleBtn">
+      <img src="image/Polygon 1.svg" alt="arrow" />
+    </div>
+    <div class="menu">
+      <a style="border-top: 1px solid #0f4e1f;  margin-top: 80px;" href="#Temperature">Nhiệt độ</a>
+      <a href="#Humidity">Độ ẩm</a>
+      <a href="#CO2">CO2</a>
+      <a href="#N">Đạm</a>
+      <a href="#P">Lân</a>
+      <a href="#K">Kali</a>
+      <a href="#SoilTemperature">NHiệt độ đất</a>
+      <a href="#SoilMoisture">Độ ẩm đất</a>
+      <a href="#PH">pH</a>
+    
+      <div class="plant-selector">
+        <label for="plantType">Cây trồng:</label>
+        <select id="plantType">
+          <option value="rice">Cây lúa</option>
+          <option value="apple">Cây táo</option>
+          <option value="industrial">Cây công nghiệp</option>
+        </select>
+
+        <label for="growthStage">Giai đoạn:</label>
+        <select id="growthStage">
+          <option value="seedling">Cây con</option>
+          <option value="vegetative">Sinh trưởng</option>
+          <option value="flowering">Ra hoa</option>
+          <option value="fruiting">Ra quả</option>
+          <option value="harvest">Thu hoạch</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!--Parameter-->
+  <div id="parameter" class="parameter">
+    <div class="title">Cảm biến</div>
+    <!-- Temperature -->
+    <div class="box">
+      <div class="card">
+        <div class="left">
+          <h3 class="title" id="Temperature">Nhiệt độ</h3>
+          <h1 id="tempValue" class="temp">-- °C</h1>
+        </div>
+
+        <div class="center">
+          <canvas id="chartTemp"></canvas>
+        </div>
+
+        <div class="warning">
+          <h3>Cảnh báo</h3>
+          <p id="statusTemp" class="status">--</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Humidity -->
+    <div class="box">
+      <div class="card">
+        <div class="left">
+          <h3 class="title" id="Humidity">Độ ẩm</h3>
+          <h1 id="humValue" class="temp">-- %</h1>
+        </div>
+
+        <div class="center">
+          <canvas id="chartHumidity"></canvas>
+        </div>
+
+        <div class="warning">
+          <h3>Cảnh báo</h3>
+          <p id="statusHumidity" class="status">--</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CO2 -->
+    <div class="box">
+      <div class="card">
+        <div class="left">
+          <h3 class="title" id="CO2">CO2</h3>
+          <h1 id="co2Value" class="temp">-- PPM</h1>
+        </div>
+
+        <div class="center">
+          <canvas id="chartCO2"></canvas>
+        </div>
+
+        <div class="warning">
+          <h3>Cảnh báo</h3>
+          <p id="statusCO2" class="status">--</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CO -->
+    <div class="box">
+      <div class="card">
+        <div class="left">
+          <h3 class="title" id="CO">CO</h3>
+          <h1 id="coValue" class="temp">-- PPM</h1>
+        </div>
+
+        <div class="center">
+          <canvas id="chartCO"></canvas>
+        </div>
+
+        <div class="warning">
+          <h3>Cảnh báo</h3>
+          <p id="statusCO" class="status">--</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOx -->
+    <div class="box">
+      <div class="card">
+        <div class="left">
+          <h3 class="title" id="NOx">NOx</h3>
+          <h1 id="noxValue" class="temp">-- PPM</h1>
+        </div>
+
+        <div class="center">
+          <canvas id="chartNOx"></canvas>
+        </div>
+
+        <div class="warning">
+          <h3>Cảnh báo</h3>
+          <p id="statusNOx" class="status">--</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- N -->
+    <div class="box">
+      <div class="card">
+        <div class="left">
+          <h3 class="title" id="N">Đạm</h3>
+          <h1 id="NValue" class="temp">-- mg/Kg</h1>
+        </div>
+
+        <div class="center">
+          <canvas id="chartN"></canvas>
+        </div>
+
+        <div class="warning">
+          <h3>Cảnh báo</h3>
+          <p id="statusN" class="status">--</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- P -->
+    <div class="box">
+      <div class="card">
+        <div class="left">
+          <h3 class="title" id="P">Lân</h3>
+          <h1 id="PValue" class="temp">-- mg/Kg</h1>
+        </div>
+
+        <div class="center">
+          <canvas id="chartP"></canvas>
+        </div>
+
+        <div class="warning">
+          <h3>Cảnh báo</h3>
+          <p id="statusP" class="status">--</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- K -->
+    <div class="box">
+      <div class="card">
+        <div class="left">
+          <h3 class="title" id="K">Kali</h3>
+          <h1 id="KValue" class="temp">-- mg/Kg</h1>
+        </div>
+
+        <div class="center">
+          <canvas id="chartK"></canvas>
+        </div>
+
+        <div class="warning">
+          <h3>Cảnh báo</h3>
+          <p id="statusK" class="status">--</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Soil Temperature -->
+    <div class="box">
+      <div class="card">
+        <div class="left">
+          <h3 class="title" id="SoilTemperature">Nhiệt độ đất</h3>
+          <h1 id="soilTempValue" class="temp">-- °C</h1>
+        </div>
+
+        <div class="center">
+          <canvas id="chartSoilTemp"></canvas>
+        </div>
+
+        <div class="warning">
+          <h3>Cảnh báo</h3>
+          <p id="statusSoilTemp" class="status">--</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Soil Moisture -->
+    <div class="box">
+      <div class="card">
+        <div class="left">
+          <h3 class="title" id="SoilMoisture">Độ ẩm đất</h3>
+          <h1 id="soilMoistureValue" class="temp">-- %</h1>
+        </div>
+
+        <div class="center">
+          <canvas id="chartSoilMoisture"></canvas>
+        </div>
+
+        <div class="warning">
+          <h3>Cảnh báo</h3>
+          <p id="statusSoilMoisture" class="status">--</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PH -->
+    <div class="box">
+      <div class="card">
+        <div class="left">
+          <h3 class="title" id="PH">pH</h3>
+          <h1 id="PHValue" class="temp">-- </h1>
+        </div>
+
+        <div class="center">
+          <canvas id="chartPH"></canvas>
+        </div>
+
+        <div class="warning">
+          <h3>Cảnh báo</h3>
+          <p id="statusPH" class="status">--</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="view-mode-toggle">
+      <div id="toggleViewBtn" class="line-toggle">
+        <span class="icon">▼</span>
+        <span class="text">Xem thêm</span>
+      </div>
+    </div>
+
+    <!-- Recommendation Box -->
+    <div class="box1" id="recommendBox">
+      <div class="card1">
+        <h3 class="title">Tổng kết lưu ý</h3>
+        <p id="recommendText" style="font-size:16px; text-align:justify; color:#0f4e1f;">
+          Đợi dữ liệu từ cảm biến ..........
+        </p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Control -->
+  <div id="control" class="control">
+    <div class="title">Điều khiển</div>
+    <!-- Switch chế độ -->
+    <div class="mode-switch">
+      <label class="switch">
+        <input type="checkbox" id="modeSwitch">
+        <span class="slider-switch"></span>
+      </label>
+      <span id="modeLabel">Tự động</span>
+    </div>
+    <!-- Khung điều khiển thiết bị -->
+    <div id="controlBox" class="control-box disabled">
+      <div class="row">
+        <button id="btnLight" class="control-btn power-btn off">Đèn bắt côn trùng</button>
+        <button id="btnSpeaker" class="control-btn power-btn off">Loa</button>
+        <button id="btnPump" class="control-btn power-btn off">Bơm</button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!--About-->
+  <div id="about" class="about">
+    <div class="title">Giới thiệu</div>
+    <div class="description">
+      <div class="title" style="font-size: 20px; text-align: center;">SMART AGRIBOX</div>
+      <p style="text-align: justify;">
+        ................................................................................................................
+      </p>
+      <div class="slide">
+        <div class="slide-item active">
+          <img src="image/tao.jpg" class="slide-img" />
+          <div class="caption">Chú thích 1</div>
+        </div>
+        <div class="slide-item">
+            <img src="image/lua.jpg" class="slide-img" />
+            <div class="caption">Chú thích 2</div>
+        </div>
+        <div class="slide-item">
+            <img src="image/cay.jpg" class="slide-img" />
+            <div class="caption">Chú thích 3</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>

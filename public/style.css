@@ -1,0 +1,830 @@
+/* --- Tổng thể --- */
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: #f9fff7;
+  color: #222;
+}
+
+/* --- Navbar --- */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 40px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 2px solid #d4f7d1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.logo {
+  color: #188c3c;
+  font-family: friza, "Segoe UI", sans-serif;
+  font-size: 34px;
+  font-weight: bold;
+  letter-spacing: -1px;
+}
+
+/* Menu */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 35px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #188c3c;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.nav-links li a.active,
+.nav-links li a:hover {
+  background-color: #188c3c;
+  color: #fffde1;
+}
+
+.menu-toggle {
+  display: none;
+}
+
+#about,#control {
+  scroll-margin-top: 70px;
+}
+
+
+/* ===== Thanh menu ===== */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 100vh;
+  background-color: #fff;
+  overflow: hidden;
+  transition: width 0.3s ease;
+  z-index: 2000;
+  margin-top: 72px;
+  display: flex;
+}
+
+/* Khi hover thì mở rộng */
+.sidebar:hover {
+  width: 260px;
+}
+
+/* ===== Nút mũi tên ===== */
+.toggle-btn {
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  transform: translateY(-50%);
+  background-color: #ffffff;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.toggle-btn img {
+  width: 25px;
+  transition: transform 0.3s ease;
+}
+
+/* Khi hover vào sidebar thì xoay mũi tên */
+.sidebar:hover .toggle-btn img {
+  transform: rotate(180deg);
+}
+
+/* ===== Danh sách menu ===== */
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: 3px solid #0f4e1f;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #0f4e1f;
+  font-weight: 600;
+  width: 200px;
+  padding: 10px 0;
+  margin: 0 10px;
+  text-align: center;
+  border-bottom: 1px solid #0f4e1f;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+/* Khi hover thì hiện chữ */
+.sidebar:hover .menu a {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+/* --- FIX MAP ĐÈ MENU --- */
+.leaflet-container {
+  z-index: 1 !important;
+}
+
+#Temperature,
+#Humidity,
+#CO2,
+#N,
+#P,
+#K,
+#SoilTemperature,
+#SoilMoisture {
+  scroll-margin-top: 200px;
+}
+
+.menu .plant-selector {
+  width: 200px;
+  padding: 10px;
+  margin: 10px 0 20px 0;
+  border-radius: 8px;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.sidebar:hover .plant-selector {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.menu .plant-selector label {
+  display: block;
+  font-size: 18px;
+  font-weight: 600;
+  color: #0f4e1f;
+  margin-bottom: 4px;
+  text-align: left;
+}
+
+.menu .plant-selector select {
+  width: 100%;
+  padding: 6px;
+  border-radius: 5px;
+  border: 1px solid #999;
+  background-color: #e8ffe8;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+
+/* --- HOME / SENSOR --- */
+
+/* Ẩn/hiện các box khi ở chế độ 1 biểu đồ */
+.parameter.single-view .box {
+  display: none;
+}
+
+.parameter.single-view .box.active {
+  display: flex;
+}
+
+/* Toggle line */
+.view-mode-toggle {
+  display: flex;
+  justify-content: center;
+  margin: 15px 0;
+}
+
+.line-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #0f4e1f;
+  padding: 6px 0;
+  user-select: none;
+}
+
+.line-toggle::before,
+.line-toggle::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: #0f4e1f;
+}
+
+.line-toggle:hover {
+  color: #138a3d;
+}
+
+.parameter {
+  text-align: center;
+  padding: 70px 20px 50px;
+  background: linear-gradient(to bottom right, #81f495, #42f7b0, #e3ffc8);
+  color: #fff;
+  margin-top: 60px;
+}
+
+.parameter .title {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #0f4e1f;
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30px;
+}
+
+.box1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30px;
+}
+
+.card {
+  display: flex;
+  width: 80%;
+  height: 300px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 20px;
+  transition: transform 0.2s;
+}
+
+.card1 {
+  display: flex;
+  width: 80%;
+  height: 300px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 20px;
+  transition: transform 0.2s;
+  align-items: center;
+  flex-direction: column;
+}
+
+.left {
+  width: 15%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  color: #1b4d2b;
+}
+
+.center {
+  width: 70%;
+}
+
+.card .title {
+  font-size: 22px;
+  color: #145d32;
+}
+
+.temp {
+  font-size: 28px;
+  color: #ff4e4e;
+}
+
+.status {
+  font-size: 14px;
+  color: #fff;
+}
+
+/* Warning box */
+.warning {
+  width: 15%;
+  box-sizing: border-box;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  transition: background 0.3s;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+.warning h3 {
+  margin: 0 0 6px;
+  font-size: 22px;
+}
+
+/* .warning.normal {
+  background-color: #48c774;
+}
+.warning.alert {
+  background-color: #f0ad4e;
+}
+.warning.danger {
+  background-color: #ff3860;
+} */
+
+
+/* --- CONTROL --- */
+.control {
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(to top right, #ffffff, #e6fff2);
+  color: #000;
+  border-top: 2px solid #bfffd3;
+}
+
+.control .title {
+  font-size: 30px;
+  font-weight: 700;
+  color: #1b4d2b;
+}
+
+/* Switch chế độ */
+.mode-switch {
+  margin: 10px;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 25px;
+  margin-right: 10px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider-switch {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .3s;
+  border-radius: 25px;
+}
+
+.slider-switch:before {
+  position: absolute;
+  content: "";
+  height: 19px;
+  width: 19px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: .3s;
+  border-radius: 50%;
+}
+
+input:checked + .slider-switch {
+  background-color: #2196F3;
+}
+
+input:checked + .slider-switch:before {
+  transform: translateX(24px);
+}
+
+/* Hộp điều khiển */
+.control-box {
+  display: inline-block;
+  padding: 25px;
+  border: 2px solid #333;
+  border-radius: 12px;
+  margin-top: 20px;
+  background: linear-gradient(to bottom right, #f9fff7, #d9ffb5);
+  transition: all 0.3s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* Bố cục nút */
+.row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Nút điều khiển */
+.control-btn {
+  width: 130px;
+  height: 80px;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s;
+  background: #28a745;
+  color: white;
+}
+
+.control-btn:hover {
+  transform: scale(1.05);
+}
+
+/* Trạng thái bật/tắt */
+.power-btn.off {
+  background: #dc3545;
+}
+
+
+/* --- ABOUT --- */
+.about {
+  text-align: center;
+  padding: 60px 20px;
+  background: linear-gradient(to bottom right, #d9ffb5, #b5ffe8);
+  color: #0f4e1f;
+  border-top: 2px solid #c0ffc0;
+}
+
+.about .title {
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+}
+
+.description {
+  font-family: "Segoe UI", Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+  text-align: justify;
+  font-size: 20px;
+  color: #184d1f;
+}
+
+.slide {
+  width: 80%;
+  height: 70vh;
+  overflow: hidden;
+  position: relative;
+  margin-top: 20px;
+  border-radius: 20px;
+}
+
+.slide-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  z-index: 0;
+}
+
+.slide-item.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.slide-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.caption {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  font-size: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 30px;
+  cursor: pointer;
+  color: #188c3c;
+  user-select: none;
+}
+
+/* =======================
+   RESPONSIVE 1200px 
+   (Laptop lớn)
+==========================*/
+@media (max-width: 1200px) {
+
+  .card, .card1 {
+    width: 90%;
+    height: auto;
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  .left {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .center {
+    width: 100%;
+  }
+
+  .warning {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .navbar {
+    padding: 12px 20px;
+  }
+
+  .nav-links {
+    gap: 20px;
+  }
+
+  .sidebar {
+    width: 35px;
+  }
+
+  .sidebar:hover {
+    width: 220px;
+  }
+
+  .menu a {
+    width: 180px;
+  }
+}
+
+/* =======================
+   RESPONSIVE 1024px 
+   (Tablet ngang / Laptop nhỏ)
+==========================*/
+@media (max-width: 1024px) {
+
+  .navbar {
+    padding: 10px 20px;
+  }
+
+  .logo {
+    font-size: 28px;
+  }
+
+  .nav-links li a {
+    font-size: 16px;
+  }
+
+  .card, .card1 {
+    width: 95%;
+  }
+
+  .slide {
+    width: 95%;
+    height: 60vh;
+  }
+
+  .sidebar {
+    margin-top: 65px;
+  }
+}
+
+/* =======================
+   RESPONSIVE 768px 
+   (Tablet dọc)
+==========================*/
+@media (max-width: 768px) {
+
+  /* -----------------------------
+     MENU NAVBAR (MOBILE)
+  ------------------------------*/
+
+  .menu-toggle {
+    display: block;
+    font-size: 30px;
+    cursor: pointer;
+    color: #188c3c;
+    user-select: none;
+    z-index: 2001;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 72px;
+    right: -240px;
+    width: 240px;
+    height: calc(100vh - 72px);
+    background: #ffffff;
+    flex-direction: column;
+    padding-top: 20px;
+    gap: 0;
+    transition: right 0.35s ease;
+    border-left: 2px solid #d4f7d1;
+    z-index: 1500;
+  }
+
+  .nav-links.open {
+    right: 0;
+  }
+
+  .nav-links li {
+    text-align: center;
+    width: 100%;
+    padding: 15px 0;
+    border-bottom: 1px solid #d4f7d1;
+  }
+
+  .nav-links li a {
+    width: 100%;
+    display: block;
+    font-size: 18px;
+  }
+
+  /* -----------------------------
+     NAVBAR
+  ------------------------------*/
+  .navbar {
+    padding: 10px 15px;
+  }
+
+  .logo {
+    font-size: 26px;
+  }
+
+  /* -----------------------------
+     CARD / SENSOR BOX
+  ------------------------------*/
+  .card,
+  .card1 {
+    padding: 10px;
+    height: auto;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .left,
+  .center,
+  .warning {
+    width: 100%;
+  }
+
+  .box,
+  .box1 {
+    flex-direction: column;
+  }
+
+  .slide {
+    height: 55vh;
+  }
+
+  /* -----------------------------
+     SIDEBAR
+  ------------------------------*/
+  .sidebar {
+    width: 30px;
+  }
+
+  .sidebar:hover {
+    width: 200px;
+  }
+
+  .menu a,
+  .plant-selector {
+    opacity: 0;
+  }
+
+  .sidebar:hover .menu a,
+  .sidebar:hover .plant-selector {
+    opacity: 1;
+  }
+}
+
+
+/* =======================
+   RESPONSIVE 480px (Mobile nhỏ)
+==========================*/
+@media (max-width: 480px) {
+
+  body {
+    font-size: 14px;
+  }
+
+  /* -----------------------------
+        NAVBAR
+  ------------------------------*/
+  .navbar {
+    padding: 8px 12px;
+  }
+
+  .logo {
+    font-size: 22px;
+  }
+
+  /* Menu toggle giống 768px nhưng nhỏ hơn */
+  .menu-toggle {
+    font-size: 26px;
+  }
+
+  /* Menu trượt full width trên điện thoại nhỏ */
+  .nav-links {
+    width: 100%;
+    right: -100%;
+  }
+
+  .nav-links.open {
+    right: 0;
+  }
+
+  .nav-links li a {
+    font-size: 16px;
+    padding: 12px 0;
+  }
+
+  /* -----------------------------
+        SENSOR CARD
+  ------------------------------*/
+  .parameter .title {
+    font-size: 24px;
+  }
+
+  .card,
+  .card1 {
+    width: 100%;
+    border-radius: 12px;
+    padding: 10px;
+    flex-direction: column;
+    height: auto;
+    text-align: center;
+  }
+
+  .left, .center, .warning {
+    width: 100%;
+  }
+
+  .left .title {
+    font-size: 18px;
+  }
+
+  .temp {
+    font-size: 22px;
+  }
+
+  .box,
+  .box1 {
+    flex-direction: column;
+  }
+
+  /* -----------------------------
+        SLIDE
+  ------------------------------*/
+  .slide {
+    width: 100%;
+    height: 42vh;
+  }
+
+  /* -----------------------------
+        SIDEBAR
+  ------------------------------*/
+  .sidebar {
+    width: 24px;
+  }
+
+  .sidebar:hover {
+    width: 150px;
+  }
+
+  .menu a {
+    width: 120px;
+    font-size: 14px;
+  }
+
+  .plant-selector {
+    width: 120px;
+  }
+}
+
