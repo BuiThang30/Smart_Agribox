@@ -545,6 +545,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  function updateRecommendationOnly() {
+    if (!lastSensorData) return;
+    if (recommendText) {
+      recommendText.textContent = generateRecommendation(lastSensorData);
+    }
+  }
+
   // ===================== SEND CODE TO ESP =====================
   function sendAlertCodesToESP(data) {
     const plant = plantTypeSelect.value;
@@ -612,8 +619,18 @@ document.addEventListener('DOMContentLoaded', () => {
     if (recommendText) recommendText.textContent = generateRecommendation(data);
   };
 
-  plantTypeSelect.addEventListener("change", () => lastSensorData && updateWarnings(lastSensorData));
-  growthStageSelect.addEventListener("change", () => lastSensorData && updateWarnings(lastSensorData));
+    plantTypeSelect.addEventListener("change", () => {
+    if (!lastSensorData) return;
+    updateWarnings(lastSensorData);
+    updateRecommendationOnly();
+  });
+
+  growthStageSelect.addEventListener("change", () => {
+    if (!lastSensorData) return;
+    updateWarnings(lastSensorData);
+    updateRecommendationOnly();
+  });
+
 
   // ===================== ID MAP =====================
   function capitalizeId(id) {
