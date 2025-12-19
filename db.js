@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS EnvironmentalData (
   CO2 REAL,
   CO REAL,
   NOx REAL,
+  SO2 REAL,
   N REAL,
   P REAL,
   K REAL,

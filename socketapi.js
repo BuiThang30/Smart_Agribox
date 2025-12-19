@@ -19,6 +19,7 @@ const envirData = {
   CO2: [],
   CO: [],
   NOx: [],
+  SO2: [],
   N: [],
   P: [],
   K: [],
@@ -70,6 +71,28 @@ function initSocket(server) {
 
             // Nếu CO2 = 0 thì lấy AQI từ API
             if (+data.CO2 === 0) {
+              try {
+                const res = await fetch(api_endpoint);
+                const json = await res.json();
+                if (json?.data?.aqi) data.CO2 = json.data.aqi;
+              } catch (err) {
+                console.error("Failed to fetch AQI:", err.message);
+              }
+            }
+
+            // Nếu NOX = 0 thì lấy AQI từ API
+            if (+data.NOx === 0) {
+              try {
+                const res = await fetch(api_endpoint);
+                const json = await res.json();
+                if (json?.data?.aqi) data.CO2 = json.data.aqi;
+              } catch (err) {
+                console.error("Failed to fetch AQI:", err.message);
+              }
+            }
+
+            // Nếu CO = 0 thì lấy AQI từ API
+            if (+data.CO === 0) {
               try {
                 const res = await fetch(api_endpoint);
                 const json = await res.json();

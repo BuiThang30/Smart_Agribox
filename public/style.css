@@ -154,39 +154,37 @@ body {
   scroll-margin-top: 200px;
 }
 
-.menu .plant-selector {
-  width: 200px;
-  padding: 10px;
-  margin: 10px 0 20px 0;
-  border-radius: 8px;
-  opacity: 0;
-  transform: translateX(-10px);
-  transition: opacity 0.3s, transform 0.3s;
+.plant-selector {
+  width: 80%;
+  margin: 30px auto;
+  display: flex;
+  gap: 50px;
 }
 
-.sidebar:hover .plant-selector {
-  opacity: 1;
-  transform: translateX(0);
+.field {
+  flex: 1;
 }
 
-.menu .plant-selector label {
+.plant-selector label {
   display: block;
+  text-align: left;
   font-size: 18px;
   font-weight: 600;
   color: #0f4e1f;
-  margin-bottom: 4px;
-  text-align: left;
+  margin-bottom: 6px;
+  white-space: nowrap;
 }
 
-.menu .plant-selector select {
+
+.plant-selector select {
   width: 100%;
-  padding: 6px;
-  border-radius: 5px;
+  padding: 8px;
+  border-radius: 6px;
   border: 1px solid #999;
   background-color: #e8ffe8;
   font-size: 18px;
-  margin-bottom: 8px;
 }
+
 
 
 /* --- HOME / SENSOR --- */
@@ -492,6 +490,7 @@ input:checked + .slider-switch:before {
   border-radius: 20px;
 }
 
+/* slide item căn giữa ảnh */
 .slide-item {
   position: absolute;
   top: 0;
@@ -501,6 +500,11 @@ input:checked + .slider-switch:before {
   opacity: 0;
   transition: opacity 1s ease-in-out;
   z-index: 0;
+
+  /* THÊM */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .slide-item.active {
@@ -508,12 +512,14 @@ input:checked + .slider-switch:before {
   z-index: 1;
 }
 
+/* ảnh tự thu – ảnh dọc sẽ nhỏ lại */
 .slide-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;   /* QUAN TRỌNG */
 }
 
+/* chú thích */
 .caption {
   position: absolute;
   bottom: 10px;
@@ -525,6 +531,7 @@ input:checked + .slider-switch:before {
   padding: 5px 10px;
   border-radius: 8px;
 }
+
 
 .menu-toggle {
   display: none;
@@ -569,7 +576,7 @@ input:checked + .slider-switch:before {
     gap: 20px;
   }
 
-  .sidebar {
+  /* .sidebar {
     width: 35px;
   }
 
@@ -579,7 +586,7 @@ input:checked + .slider-switch:before {
 
   .menu a {
     width: 180px;
-  }
+  } */
 }
 
 /* =======================
@@ -609,9 +616,9 @@ input:checked + .slider-switch:before {
     height: 60vh;
   }
 
-  .sidebar {
+  /* .sidebar {
     margin-top: 65px;
-  }
+  } */
 }
 
 /* =======================
@@ -705,7 +712,7 @@ input:checked + .slider-switch:before {
   /* -----------------------------
      SIDEBAR
   ------------------------------*/
-  .sidebar {
+  /* .sidebar {
     width: 30px;
   }
 
@@ -721,7 +728,7 @@ input:checked + .slider-switch:before {
   .sidebar:hover .menu a,
   .sidebar:hover .plant-selector {
     opacity: 1;
-  }
+  } */
 }
 
 
@@ -810,7 +817,7 @@ input:checked + .slider-switch:before {
   /* -----------------------------
         SIDEBAR
   ------------------------------*/
-  .sidebar {
+  /* .sidebar {
     width: 24px;
   }
 
@@ -825,6 +832,6 @@ input:checked + .slider-switch:before {
 
   .plant-selector {
     width: 120px;
-  }
+  } */
 }
 

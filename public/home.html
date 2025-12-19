@@ -19,43 +19,54 @@
   </nav>
 
 
+  <!-- SIDEBAR -->
   <div class="sidebar" id="sidebar">
     <div class="toggle-btn" id="toggleBtn">
       <img src="image/Polygon 1.svg" alt="arrow" />
     </div>
+
     <div class="menu">
-      <a style="border-top: 1px solid #0f4e1f;  margin-top: 80px;" href="#Temperature">Nhiệt độ</a>
+      <a style="border-top: 1px solid #0f4e1f; margin-top: 80px;" href="#Temperature">Nhiệt độ</a>
       <a href="#Humidity">Độ ẩm</a>
       <a href="#CO2">CO2</a>
+      <a href="#CO">CO</a>
+      <a href="#NOx">NOx</a>            
+      <a href="#SO2">SO2</a>
       <a href="#N">Đạm</a>
       <a href="#P">Lân</a>
       <a href="#K">Kali</a>
-      <a href="#SoilTemperature">NHiệt độ đất</a>
+      <a href="#SoilTemperature">Nhiệt độ đất</a>
       <a href="#SoilMoisture">Độ ẩm đất</a>
       <a href="#PH">pH</a>
-    
-      <div class="plant-selector">
-        <label for="plantType">Cây trồng:</label>
-        <select id="plantType">
-          <option value="rice">Cây lúa</option>
-          <option value="apple">Cây táo</option>
-          <option value="industrial">Cây công nghiệp</option>
-        </select>
-
-        <label for="growthStage">Giai đoạn:</label>
-        <select id="growthStage">
-          <option value="seedling">Cây con</option>
-          <option value="vegetative">Sinh trưởng</option>
-          <option value="flowering">Ra hoa</option>
-          <option value="fruiting">Ra quả</option>
-          <option value="harvest">Thu hoạch</option>
-        </select>
-      </div>
     </div>
   </div>
 
   <!--Parameter-->
   <div id="parameter" class="parameter">
+    
+  <div class="title">Lựa chọn cây trồng</div>
+
+  <div class="plant-selector">
+    <div class="field">
+      <label for="plantType">Cây trồng:</label>
+      <select id="plantType">
+        <option value="vegetable">Cây rau màu</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="growthStage">Giai đoạn:</label>
+      <select id="growthStage">
+        <option value="seedling">Nảy mầm – cây con</option>
+        <option value="vegetative">Sinh trưởng thân – lá</option>
+        <!-- <option value="flowering">Ra hoa</option>
+        <option value="fruiting">Ra quả</option> -->
+        <option value="harvest">Thu hoạch</option>
+      </select>
+    </div>
+  </div>
+
+
     <div class="title">Cảm biến</div>
     <!-- Temperature -->
     <div class="box">
@@ -148,6 +159,25 @@
         <div class="warning">
           <h3>Cảnh báo</h3>
           <p id="statusNOx" class="status">--</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SO2 -->
+    <div class="box">
+      <div class="card">
+        <div class="left">
+          <h3 class="title" id="SO2">SO2</h3>
+          <h1 id="so2Value" class="temp">-- </h1>
+        </div>
+
+        <div class="center">
+          <canvas id="chartSO2"></canvas>
+        </div>
+
+        <div class="warning">
+          <h3>Cảnh báo</h3>
+          <p id="statusSO2" class="status">--</p>
         </div>
       </div>
     </div>
@@ -276,7 +306,7 @@
     <!-- Recommendation Box -->
     <div class="box1" id="recommendBox">
       <div class="card1">
-        <h3 class="title">Tổng kết lưu ý</h3>
+        <h3 class="title">Khuyến nghị</h3>
         <p id="recommendText" style="font-size:16px; text-align:justify; color:#0f4e1f;">
           Đợi dữ liệu từ cảm biến ..........
         </p>
@@ -313,13 +343,13 @@
     <div class="title">Giới thiệu</div>
     <div class="description">
       <div class="title" style="font-size: 20px; text-align: center;">SMART AGRIBOX</div>
-      <p style="text-align: justify;">
-        ................................................................................................................
+      <p style="text-align: center; max-width: 80%;">
+        Smart AgriBox là giải pháp IoT nông nghiệp thông minh, giúp giám sát và điều khiển các yếu tố môi trường canh tác theo thời gian thực. Thiết bị tích hợp đa cảm biến, hỗ trợ người dùng tối ưu chăm sóc cây trồng và nâng cao hiệu quả sản xuất.
       </p>
       <div class="slide">
         <div class="slide-item active">
-          <img src="image/tao.jpg" class="slide-img" />
-          <div class="caption">Chú thích 1</div>
+            <img src="image/about1.jpg" class="slide-img"/>
+            <div class="caption">Chú thích 1</div>
         </div>
         <div class="slide-item">
             <img src="image/lua.jpg" class="slide-img" />
