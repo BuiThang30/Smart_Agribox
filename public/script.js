@@ -305,13 +305,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ===================== PLANT DATA =====================
   // ===================== PLANT THRESHOLDS (THEO FILE WORD) =====================
+
   const PLANT_THRESHOLDS = {
+    // Cây rau màu
     vegetable: {
 
       // ===================== NẢY MẦM – CÂY CON =====================
       seedling: {
         "soil-temperature": [
-          { min: -Infinity, max: 15, text: "Quá thấp", color: "#ff3860", code: 3, recommendation: "Che phủ giữ ấm đất; tránh tưới nước lạnh để đảm bảo nảy mầm đồng đều" },
+          { min: 0, max: 15, text: "Quá thấp", color: "#ff3860", code: 3, recommendation: "Che phủ giữ ấm đất; tránh tưới nước lạnh để đảm bảo nảy mầm đồng đều" },
           { min: 15, max: 20, text: "Chưa tối ưu", color: "#ffdd57", code: 1, recommendation: "Theo dõi nhiệt độ; điều chỉnh thời điểm tưới vào ban ngày" },
           { min: 20, max: 25, text: "Bình thường", color: "#48c774", code: 0, recommendation: "Duy trì điều kiện hiện tại; giám sát định kỳ" },
           { min: 25, max: Infinity, text: "Quá cao", color: "#b71c1c", code: 2, recommendation: "Che lưới giảm nhiệt; tưới nhẹ để hạ nhiệt vùng rễ" }
@@ -472,46 +474,268 @@ document.addEventListener('DOMContentLoaded', () => {
           { min: 75, max: Infinity, text: "Quá cao", color: "#b71c1c", code: 2, recommendation: "Giảm ẩm để hạn chế nấm bệnh" }
         ]
       }
+    },
+
+    // Hoa – cây cảnh
+    flower: {
+      // ===================== NẢY MẦM – CÂY CON =====================
+      seedling: {
+        "soil-temperature": [
+          { min: -Infinity, max: 17, text: "Quá thấp", color: "#ff3860", code: 3, recommendation: "Che phủ gốc, hạn chế tưới nước lạnh để bảo vệ rễ non" },
+          { min: 17, max: 20, text: "Chưa tối ưu", color: "#ffdd57", code: 1, recommendation: "Duy trì che phủ và điều chỉnh thời điểm tưới" },
+          { min: 20, max: 25, text: "Bình thường", color: "#48c774", code: 0, recommendation: "Giữ điều kiện đất ổn định cho rễ phát triển" },
+          { min: 25, max: Infinity, text: "Quá cao", color: "#b71c1c", code: 2, recommendation: "Che mát và tưới làm mát đất phù hợp" }
+        ],
+
+        "soil-moisture": [
+          { min: -Infinity, max: 55, text: "Quá thấp", color: "#ff3860", code: 3, recommendation: "Tưới bổ sung vừa phải, che phủ gốc" },
+          { min: 55, max: 65, text: "Chưa tối ưu", color: "#ffdd57", code: 1, recommendation: "Tăng tần suất tưới, hạn chế bốc hơi" },
+          { min: 65, max: 75, text: "Bình thường", color: "#48c774", code: 0, recommendation: "Duy trì độ ẩm ổn định cho rễ non" },
+          { min: 75, max: Infinity, text: "Quá cao", color: "#b71c1c", code: 2, recommendation: "Giảm tưới, kiểm tra thoát nước" }
+        ],
+
+        N: [
+          { min: -Infinity, max: 50, text: "Rất thấp", color: "#ff3860", code: 3, recommendation: "Bổ sung đạm dễ tiêu liều thấp" },
+          { min: 50, max: 80, text: "Thấp", color: "#ffdd57", code: 1, recommendation: "Điều chỉnh bón đạm cân đối" },
+          { min: 80, max: 120, text: "Tối ưu", color: "#48c774", code: 0, recommendation: "Duy trì dinh dưỡng ổn định" },
+          { min: 120, max: 150, text: "Cao", color: "#ff9f43", code: 2, recommendation: "Giảm đạm tránh vươn thân yếu" },
+          { min: 150, max: Infinity, text: "Rất cao", color: "#b71c1c", code: 4, recommendation: "Ngừng bón đạm, theo dõi cháy rễ" }
+        ],
+
+        P: [
+          { min: -Infinity, max: 20, text: "Rất thấp", color: "#ff3860", code: 3, recommendation: "Bổ sung lân dễ tiêu kích thích rễ" },
+          { min: 20, max: 25, text: "Thấp", color: "#ffdd57", code: 1, recommendation: "Điều chỉnh tăng lân nhẹ" },
+          { min: 25, max: 35, text: "Tối ưu", color: "#48c774", code: 0, recommendation: "Duy trì lân phù hợp" },
+          { min: 35, max: 45, text: "Cao", color: "#ff9f43", code: 2, recommendation: "Giảm bón lân" },
+          { min: 45, max: Infinity, text: "Rất cao", color: "#b71c1c", code: 4, recommendation: "Ngừng bón lân" }
+        ],
+
+        K: [
+          { min: -Infinity, max: 15, text: "Rất thấp", color: "#ff3860", code: 3, recommendation: "Bổ sung kali tăng sức chống chịu" },
+          { min: 15, max: 20, text: "Thấp", color: "#ffdd57", code: 1, recommendation: "Điều chỉnh kali phù hợp" },
+          { min: 20, max: 30, text: "Tối ưu", color: "#48c774", code: 0, recommendation: "Duy trì kali ổn định" },
+          { min: 30, max: 40, text: "Cao", color: "#ff9f43", code: 2, recommendation: "Giảm kali tránh đối kháng Ca, Mg" },
+          { min: 40, max: Infinity, text: "Rất cao", color: "#b71c1c", code: 4, recommendation: "Ngừng bón kali" }
+        ],
+
+        temperature: [
+          { min: -Infinity, max: 15, text: "Quá thấp", color: "#ff3860", code: 3, recommendation: "Che chắn gió lạnh, hạn chế tưới" },
+          { min: 15, max: 18, text: "Chưa tối ưu", color: "#ffdd57", code: 1, recommendation: "Ổn định vi khí hậu quanh cây" },
+          { min: 18, max: 28, text: "Bình thường", color: "#48c774", code: 0, recommendation: "Điều kiện thuận lợi cho cây con" },
+          { min: 28, max: Infinity, text: "Quá cao", color: "#b71c1c", code: 2, recommendation: "Che mát, phun sương giảm nhiệt" }
+        ],
+
+        humidity: [
+          { min: -Infinity, max: 60, text: "Quá thấp", color: "#ff3860", code: 3, recommendation: "Phun sương nhẹ, che gió" },
+          { min: 60, max: 70, text: "Chưa tối ưu", color: "#ffdd57", code: 1, recommendation: "Điều chỉnh tưới và che phủ" },
+          { min: 70, max: 85, text: "Bình thường", color: "#48c774", code: 0, recommendation: "Duy trì độ ẩm phù hợp" },
+          { min: 85, max: Infinity, text: "Quá cao", color: "#b71c1c", code: 2, recommendation: "Giảm phun nước, tăng thông thoáng" }
+        ],
+
+        pH: [
+          { min: -Infinity, max: 5.0, text: "Quá thấp", color: "#ff3860", code: 3, recommendation: "Bổ sung vôi/dolomite liều thấp" },
+          { min: 5.0, max: 5.5, text: "Chưa tối ưu", color: "#ffdd57", code: 1, recommendation: "Điều chỉnh nhẹ pH nước" },
+          { min: 5.5, max: 6.51, text: "Bình thường", color: "#48c774", code: 0, recommendation: "Duy trì pH phù hợp" },
+          { min: 6.51, max: Infinity, text: "Cao", color: "#b71c1c", code: 2, recommendation: "Giảm pH bằng nguồn nước phù hợp" }
+        ]
+      },
+
+      // ===================== SINH TRƯỞNG =====================
+      vegetative: {
+        "soil-temperature": [
+          { min: -Infinity, max: 17, text: "Quá thấp", color: "#ff3860", code: 3, recommendation: "Phủ gốc, cải thiện điều kiện đất để hạn chế giảm sinh trưởng" },
+          { min: 17, max: 20, text: "Chưa tối ưu", color: "#ffdd57", code: 1, recommendation: "Điều chỉnh tưới và che phủ để ổn định nhiệt độ đất" },
+          { min: 20, max: 25, text: "Bình thường", color: "#48c774", code: 0, recommendation: "Duy trì nhiệt độ đất thuận lợi cho hút nước và dinh dưỡng" },
+          { min: 25, max: Infinity, text: "Quá cao", color: "#b71c1c", code: 2, recommendation: "Che mát và bổ sung hữu cơ để hạn chế tích nhiệt đất" }
+        ],
+
+        "soil-moisture": [
+          { min: -Infinity, max: 50, text: "Quá thấp", color: "#ff3860", code: 3, recommendation: "Bổ sung nước kịp thời kết hợp che phủ đất" },
+          { min: 50, max: 60, text: "Chưa tối ưu", color: "#ffdd57", code: 1, recommendation: "Điều chỉnh lượng nước tưới phù hợp" },
+          { min: 60, max: 70, text: "Bình thường", color: "#48c774", code: 0, recommendation: "Giữ ẩm đất ổn định cho sinh trưởng thân lá" },
+          { min: 70, max: Infinity, text: "Quá cao", color: "#b71c1c", code: 2, recommendation: "Giảm tưới, cải thiện độ thông thoáng đất" }
+        ],
+
+        N: [
+          { min: -Infinity, max: 70, text: "Rất thấp", color: "#ff3860", code: 3, recommendation: "Bổ sung đạm để thúc đẩy sinh trưởng thân lá" },
+          { min: 70, max: 100, text: "Thấp", color: "#ffdd57", code: 1, recommendation: "Tăng đạm kết hợp trung – vi lượng" },
+          { min: 100, max: 150, text: "Tối ưu", color: "#48c774", code: 0, recommendation: "Duy trì đạm cân đối cho tán lá khỏe" },
+          { min: 150, max: 180, text: "Cao", color: "#ff9f43", code: 2, recommendation: "Giảm bón đạm tránh sinh trưởng quá mức" },
+          { min: 180, max: Infinity, text: "Rất cao", color: "#b71c1c", code: 4, recommendation: "Ngừng bón đạm, tránh đổ ngã" }
+        ],
+
+        P: [
+          { min: -Infinity, max: 25, text: "Rất thấp", color: "#ff3860", code: 3, recommendation: "Bổ sung lân cải thiện hút nước và dinh dưỡng" },
+          { min: 25, max: 30, text: "Thấp", color: "#ffdd57", code: 1, recommendation: "Tăng lân mức vừa để ổn định sinh trưởng" },
+          { min: 30, max: 40, text: "Tối ưu", color: "#48c774", code: 0, recommendation: "Duy trì lân cân đối" },
+          { min: 40, max: 55, text: "Cao", color: "#ff9f43", code: 2, recommendation: "Giảm bón lân tránh đối kháng vi lượng" },
+          { min: 55, max: Infinity, text: "Rất cao", color: "#b71c1c", code: 4, recommendation: "Ngừng bón lân, kiểm tra tích lũy đất" }
+        ],
+
+        K: [
+          { min: -Infinity, max: 25, text: "Rất thấp", color: "#ff3860", code: 3, recommendation: "Bổ sung kali tăng cường quang hợp" },
+          { min: 25, max: 30, text: "Thấp", color: "#ffdd57", code: 1, recommendation: "Điều chỉnh kali hỗ trợ thân lá" },
+          { min: 30, max: 40, text: "Tối ưu", color: "#48c774", code: 0, recommendation: "Duy trì kali ổn định" },
+          { min: 40, max: 55, text: "Cao", color: "#ff9f43", code: 2, recommendation: "Giảm kali tránh hạn chế hấp thu canxi" },
+          { min: 55, max: Infinity, text: "Rất cao", color: "#b71c1c", code: 4, recommendation: "Ngừng bón kali, kiểm tra mặn đất" }
+        ],
+
+        temperature: [
+          { min: -Infinity, max: 15, text: "Quá thấp", color: "#ff3860", code: 3, recommendation: "Che chắn hạn chế ảnh hưởng nhiệt độ thấp" },
+          { min: 15, max: 18, text: "Chưa tối ưu", color: "#ffdd57", code: 1, recommendation: "Điều chỉnh vi khí hậu" },
+          { min: 18, max: 28, text: "Bình thường", color: "#48c774", code: 0, recommendation: "Điều kiện thích hợp cho sinh trưởng thân lá" },
+          { min: 28, max: Infinity, text: "Quá cao", color: "#b71c1c", code: 2, recommendation: "Che mát, điều chỉnh tưới giảm stress nhiệt" }
+        ],
+
+        humidity: [
+          { min: -Infinity, max: 60, text: "Quá thấp", color: "#ff3860", code: 3, recommendation: "Phun sương hạn chế héo sinh lý" },
+          { min: 60, max: 70, text: "Chưa tối ưu", color: "#ffdd57", code: 1, recommendation: "Điều chỉnh tưới để ổn định độ ẩm" },
+          { min: 70, max: 85, text: "Bình thường", color: "#48c774", code: 0, recommendation: "Duy trì độ ẩm thích hợp" },
+          { min: 85, max: Infinity, text: "Quá cao", color: "#b71c1c", code: 2, recommendation: "Tăng thông thoáng phòng bệnh" }
+        ],
+
+        pH: [
+          { min: -Infinity, max: 5.0, text: "Quá thấp", color: "#ff3860", code: 3, recommendation: "Điều chỉnh pH tránh ức chế sinh trưởng" },
+          { min: 5.0, max: 5.5, text: "Chưa tối ưu", color: "#ffdd57", code: 1, recommendation: "Hiệu chỉnh pH dần về mức phù hợp" },
+          { min: 5.5, max: 6.51, text: "Bình thường", color: "#48c774", code: 0, recommendation: "Duy trì pH cân đối dinh dưỡng" },
+          { min: 6.51, max: Infinity, text: "Cao", color: "#b71c1c", code: 2, recommendation: "Giảm pH để tránh giảm hấp thu vi lượng" }
+        ]
+      },
+
+
+      // ===================== RA HOA =====================
+      flowering: {
+        "soil-temperature": [
+          { min: -Infinity, max: 15, text: "Quá thấp", color: "#ff3860", code: 3, recommendation: "Che phủ giữ ấm đất, tránh chậm ra hoa" },
+          { min: 15, max: 18, text: "Chưa tối ưu", color: "#ffdd57", code: 1, recommendation: "Duy trì che phủ hỗ trợ phân hóa mầm hoa" },
+          { min: 18, max: 24, text: "Bình thường", color: "#48c774", code: 0, recommendation: "Giữ nhiệt độ đất ổn định cho hoa bền màu" },
+          { min: 24, max: Infinity, text: "Quá cao", color: "#b71c1c", code: 2, recommendation: "Che mát, tưới làm mát nhẹ" }
+        ],
+
+        "soil-moisture": [
+          { min: -Infinity, max: 45, text: "Quá thấp", color: "#ff3860", code: 3, recommendation: "Tưới bổ sung nhẹ tránh rụng nụ" },
+          { min: 45, max: 55, text: "Chưa tối ưu", color: "#ffdd57", code: 1, recommendation: "Duy trì tưới điều độ" },
+          { min: 55, max: 65, text: "Bình thường", color: "#48c774", code: 0, recommendation: "Giữ ẩm vừa phải cho hoa phát triển" },
+          { min: 65, max: Infinity, text: "Quá cao", color: "#b71c1c", code: 2, recommendation: "Giảm tưới tránh bệnh và rụng hoa" }
+        ],
+
+        N: [
+          { min: -Infinity, max: 50, text: "Rất thấp", color: "#ff3860", code: 3, recommendation: "Bổ sung nhẹ đạm duy trì sinh lý cây" },
+          { min: 50, max: 70, text: "Thấp", color: "#ffdd57", code: 1, recommendation: "Tăng nhẹ đạm tránh suy kiệt cây" },
+          { min: 70, max: 110, text: "Tối ưu", color: "#48c774", code: 0, recommendation: "Duy trì đạm hợp lý cho chất lượng hoa" },
+          { min: 110, max: 140, text: "Cao", color: "#ff9f43", code: 2, recommendation: "Giảm đạm tránh rụng hoa" },
+          { min: 140, max: Infinity, text: "Rất cao", color: "#b71c1c", code: 4, recommendation: "Ngừng bón đạm do nguy cơ ức chế ra hoa" }
+        ],
+
+        P: [
+          { min: -Infinity, max: 30, text: "Rất thấp", color: "#ff3860", code: 3, recommendation: "Bổ sung lân thúc đẩy phân hóa mầm hoa" },
+          { min: 30, max: 40, text: "Thấp", color: "#ffdd57", code: 1, recommendation: "Tăng lân nâng cao tỷ lệ ra hoa" },
+          { min: 40, max: 60, text: "Tối ưu", color: "#48c774", code: 0, recommendation: "Duy trì lân cho hoa ổn định" },
+          { min: 60, max: 80, text: "Cao", color: "#ff9f43", code: 2, recommendation: "Giảm bón lân tránh mất cân đối" },
+          { min: 80, max: Infinity, text: "Rất cao", color: "#b71c1c", code: 4, recommendation: "Ngừng bón lân" }
+        ],
+
+        K: [
+          { min: -Infinity, max: 40, text: "Rất thấp", color: "#ff3860", code: 3, recommendation: "Bổ sung kali tăng độ bền hoa" },
+          { min: 40, max: 50, text: "Thấp", color: "#ffdd57", code: 1, recommendation: "Điều chỉnh kali hỗ trợ vận chuyển dinh dưỡng" },
+          { min: 50, max: 70, text: "Tối ưu", color: "#48c774", code: 0, recommendation: "Duy trì kali cho hoa bền màu" },
+          { min: 70, max: 90, text: "Cao", color: "#ff9f43", code: 2, recommendation: "Giảm kali tránh dư thừa" },
+          { min: 90, max: Infinity, text: "Rất cao", color: "#b71c1c", code: 4, recommendation: "Ngừng bón kali" }
+        ],
+
+        temperature: [
+          { min: -Infinity, max: 16, text: "Quá thấp", color: "#ff3860", code: 3, recommendation: "Che chắn tránh rụng nụ, hoa" },
+          { min: 16, max: 18, text: "Chưa tối ưu", color: "#ffdd57", code: 1, recommendation: "Ổn định nhiệt độ môi trường" },
+          { min: 18, max: 26, text: "Bình thường", color: "#48c774", code: 0, recommendation: "Duy trì nhiệt độ thích hợp cho hoa nở đều" },
+          { min: 26, max: Infinity, text: "Quá cao", color: "#b71c1c", code: 2, recommendation: "Che mát, phun sương giảm nhiệt" }
+        ],
+
+        humidity: [
+          { min: -Infinity, max: 50, text: "Quá thấp", color: "#ff3860", code: 3, recommendation: "Phun sương sáng sớm tránh khô hoa" },
+          { min: 50, max: 60, text: "Chưa tối ưu", color: "#ffdd57", code: 1, recommendation: "Điều chỉnh độ ẩm hỗ trợ nở hoa" },
+          { min: 60, max: 75, text: "Bình thường", color: "#48c774", code: 0, recommendation: "Duy trì độ ẩm cho hoa bền lâu" },
+          { min: 75, max: Infinity, text: "Quá cao", color: "#b71c1c", code: 2, recommendation: "Giảm tưới, tăng thông thoáng" }
+        ],
+
+        pH: [
+          { min: -Infinity, max: 5.5, text: "Quá thấp", color: "#ff3860", code: 3, recommendation: "Điều chỉnh pH tránh ảnh hưởng phân hóa hoa" },
+          { min: 5.5, max: 6.0, text: "Chưa tối ưu", color: "#ffdd57", code: 1, recommendation: "Tăng nhẹ pH hỗ trợ ra hoa" },
+          { min: 6.0, max: 6.81, text: "Bình thường", color: "#48c774", code: 0, recommendation: "Duy trì pH nâng cao chất lượng hoa" },
+          { min: 6.81, max: Infinity, text: "Cao", color: "#b71c1c", code: 2, recommendation: "Giảm pH tránh kết tủa dinh dưỡng" }
+        ]
+      }
     }
   };
 
   // ====== CÁC CHẤT DÙNG CHUNG MỌI GIAI ĐOẠN ======
   // ===================== COMMON THRESHOLDS =====================
   const COMMON_THRESHOLDS = {
-    PH: [
-      { min: -Infinity, max: 5.5, text: "Thấp", color: "#ff3860", code: 3, recommendation: "Điều chỉnh pH nước bằng biện pháp trung hòa" },
-      { min: 5.5, max: 6.0, text: "Chưa tối ưu", color: "#ffdd57", code: 1, recommendation: "Theo dõi và điều chỉnh nhẹ" },
-      { min: 6.0, max: 6.8, text: "Bình thường", color: "#48c774", code: 0, recommendation: "Duy trì nguồn nước tưới hiện tại" },
-      { min: 6.8, max: Infinity, text: "Cao", color: "#b71c1c", code: 2, recommendation: "Xử lý giảm pH nước tưới" }
-    ],
+    vegetable: {
+      PH: [
+        { min: -Infinity, max: 5.5, text: "Thấp", color: "#ff3860", code: 3, recommendation: "Điều chỉnh pH nước bằng biện pháp trung hòa" },
+        { min: 5.5, max: 6.0, text: "Chưa tối ưu", color: "#ffdd57", code: 1, recommendation: "Theo dõi và điều chỉnh nhẹ" },
+        { min: 6.0, max: 6.81, text: "Bình thường", color: "#48c774", code: 0, recommendation: "Duy trì nguồn nước tưới hiện tại" },
+        { min: 6.81, max: Infinity, text: "Cao", color: "#b71c1c", code: 2, recommendation: "Xử lý giảm pH nước tưới" }
+      ],
 
-    CO2: [
-      { min: -Infinity, max: 350, text: "Thấp bất thường", color: "#ff3860", code: 3, recommendation: "Kiểm tra vị trí cảm biến; đánh giá vi khí hậu" },
-      { min: 350, max: 450, text: "Bình thường", color: "#48c774", code: 0, recommendation: "Điều kiện khí quyển ổn định" },
-      { min: 450, max: 800, text: "Cao bất thường", color: "#ff9f43", code: 2, recommendation: "Theo dõi nguồn phát thải cục bộ" },
-      { min: 800, max: Infinity, text: "Ô nhiễm cục bộ", color: "#b71c1c", code: 3, recommendation: "Không thu hoạch trong thời gian ô nhiễm" }
-    ],
+      CO2: [
+        { min: -Infinity, max: 350, text: "Thấp bất thường", color: "#ff3860", code: 3, recommendation: "Kiểm tra vị trí cảm biến; đánh giá vi khí hậu" },
+        { min: 350, max: 450.1, text: "Bình thường", color: "#48c774", code: 0, recommendation: "Điều kiện khí quyển ổn định" },
+        { min: 450.1, max: 800, text: "Cao bất thường", color: "#ff9f43", code: 2, recommendation: "Theo dõi nguồn phát thải cục bộ" },
+        { min: 800, max: Infinity, text: "Ô nhiễm cục bộ", color: "#b71c1c", code: 3, recommendation: "Không thu hoạch trong thời gian ô nhiễm" }
+      ],
 
-    CO: [
-      { min: 0, max: 1, text: "An toàn", color: "#48c774", code: 0, recommendation: "Điều kiện bình thường; tiếp tục giám sát" },
-      { min: 1, max: 5, text: "Cảnh báo", color: "#ffdd57", code: 1, recommendation: "Theo dõi nguồn phát thải" },
-      { min: 5, max: 9, text: "Nguy hiểm", color: "#ff9f43", code: 2, recommendation: "Không thu hoạch; hạn chế tiếp xúc" },
-      { min: 9, max: Infinity, text: "Rất nguy hiểm", color: "#b71c1c", code: 3, recommendation: "Dừng thu hoạch; cảnh báo môi trường" }
-    ],
+      CO: [
+        { min: 0, max: 3.1, text: "An toàn", color: "#48c774", code: 0, recommendation: "Điều kiện bình thường; tiếp tục giám sát" },
+        { min: 3.1, max: 5, text: "Theo dõi", color: "#ffdd57", code: 1, recommendation: "Theo dõi nguồn phát thải" },
+        { min: 5, max: 9, text: "Nguy hiểm", color: "#ff9f43", code: 2, recommendation: "Không thu hoạch; hạn chế tiếp xúc" },
+        { min: 9, max: Infinity, text: "Rất nguy hiểm", color: "#b71c1c", code: 3, recommendation: "Dừng thu hoạch; cảnh báo môi trường" }
+      ],
 
-    SO2: [
-      { min: 0, max: 0.05, text: "An toàn", color: "#48c774", code: 0, recommendation: "Duy trì giám sát định kỳ" },
-      { min: 0.05, max: 0.1, text: "Cảnh báo", color: "#ffdd57", code: 1, recommendation: "Theo dõi biểu hiện cháy mép lá" },
-      { min: 0.1, max: 0.3, text: "Nguy hiểm", color: "#ff9f43", code: 2, recommendation: "Không thu hoạch; che chắn tạm thời" },
-      { min: 0.3, max: Infinity, text: "Rất nguy hiểm", color: "#b71c1c", code: 3, recommendation: "Dừng sản xuất; báo cáo ô nhiễm" }
-    ],
+      SO2: [
+        { min: 0, max: 0.051, text: "An toàn", color: "#48c774", code: 0, recommendation: "Duy trì giám sát định kỳ" },
+        { min: 0.051, max: 0.1, text: "Theo dõi", color: "#ffdd57", code: 1, recommendation: "Theo dõi biểu hiện cháy mép lá" },
+        { min: 0.1, max: 0.3, text: "Nguy hiểm", color: "#ff9f43", code: 2, recommendation: "Không thu hoạch; che chắn tạm thời" },
+        { min: 0.3, max: Infinity, text: "Rất nguy hiểm", color: "#b71c1c", code: 3, recommendation: "Dừng sản xuất; báo cáo ô nhiễm" }
+      ],
 
-    NOx: [
-      { min: 0, max: 0.04, text: "An toàn", color: "#48c774", code: 0, recommendation: "Điều kiện không khí bình thường" },
-      { min: 0.04, max: 0.1, text: "Cảnh báo", color: "#ffdd57", code: 1, recommendation: "Theo dõi stress lá" },
-      { min: 0.1, max: 0.2, text: "Nguy hiểm", color: "#ff9f43", code: 2, recommendation: "Không thu hoạch; hạn chế canh tác" },
-      { min: 0.2, max: Infinity, text: "Rất nguy hiểm", color: "#b71c1c", code: 3, recommendation: "Dừng thu hoạch; cảnh báo môi trường" }
-    ]
+      NOx: [
+        { min: 0, max: 0.041, text: "An toàn", color: "#48c774", code: 0, recommendation: "Điều kiện không khí bình thường" },
+        { min: 0.041, max: 0.1, text: "Theo dõi", color: "#ffdd57", code: 1, recommendation: "Theo dõi stress lá" },
+        { min: 0.1, max: 0.2, text: "Nguy hiểm", color: "#ff9f43", code: 2, recommendation: "Không thu hoạch; hạn chế canh tác" },
+        { min: 0.2, max: Infinity, text: "Rất nguy hiểm", color: "#b71c1c", code: 3, recommendation: "Dừng thu hoạch; cảnh báo môi trường" }
+      ]
+    },
+
+    flower: {
+      CO2: [
+        { min: -Infinity, max: 300, text: "Thấp bất thường", color: "#ff3860", code: 3, recommendation: "Kiểm tra cảm biến và thông thoáng khu trồng" },
+        { min: 350, max: 450.1, text: "Bình thường", color: "#48c774", code: 0, recommendation: "Duy trì môi trường hiện tại" },
+        { min: 450.1, max: 800, text: "Cao bất thường", color: "#ff9f43", code: 2, recommendation: "Tăng thông gió, kiểm tra nguồn CO₂" },
+        { min: 800, max: Infinity, text: "Ô nhiễm cục bộ", color: "#b71c1c", code: 4, recommendation: "Xử lý nguồn phát thải ngay" }
+      ],
+
+      CO: [
+        { min: -Infinity, max: 3.1, text: "An toàn", color: "#48c774", code: 0, recommendation: "Duy trì giám sát định kỳ" },
+        { min: 3.1, max: 5, text: "Theo dõi", color: "#ffdd57", code: 1, recommendation: "Kiểm tra nguồn đốt gần khu trồng" },
+        { min: 5, max: 9, text: "Nguy hiểm", color: "#ff9f43", code: 2, recommendation: "Loại bỏ nguồn phát thải CO" },
+        { min: 9, max: Infinity, text: "Rất nguy hiểm", color: "#b71c1c", code: 4, recommendation: "Cảnh báo khẩn cấp" }
+      ],
+
+      SO2: [
+        { min: -Infinity, max: 0.051, text: "An toàn", color: "#48c774", code: 0, recommendation: "Môi trường phù hợp cho cây hoa" },
+        { min: 0.051, max: 0.1, text: "Theo dõi", color: "#ffdd57", code: 1, recommendation: "Tăng thông gió, hạn chế khí thải" },
+        { min: 0.1, max: 0.3, text: "Nguy hiểm", color: "#ff9f43", code: 2, recommendation: "Che chắn cây, giảm tiếp xúc khí ô nhiễm" },
+        { min: 0.3, max: Infinity, text: "Rất nguy hiểm", color: "#b71c1c", code: 4, recommendation: "Xử lý môi trường khẩn cấp" }
+      ],
+
+      NOx: [
+        { min: -Infinity, max: 0.041, text: "An toàn", color: "#48c774", code: 0, recommendation: "Phù hợp cho hoa – cây cảnh" },
+        { min: 0.041, max: 0.1, text: "Theo dõi", color: "#ffdd57", code: 1, recommendation: "Tăng thông gió" },
+        { min: 0.1, max: 0.2, text: "Nguy hiểm", color: "#ff9f43", code: 2, recommendation: "Che chắn cây, hạn chế tiếp xúc" },
+        { min: 0.2, max: Infinity, text: "Rất nguy hiểm", color: "#b71c1c", code: 4, recommendation: "Giảm ô nhiễm ngay lập tức" }
+      ]
+    }
   };
 
 
@@ -521,7 +745,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function getSensorRule(sensor, plant, stage) {
-    if (COMMON_THRESHOLDS[sensor]) return COMMON_THRESHOLDS[sensor];
+    // Ưu tiên thông số dùng chung theo loại cây
+    if (COMMON_THRESHOLDS[plant]?.[sensor]) {
+      return COMMON_THRESHOLDS[plant][sensor];
+    }
+
+    // Sau đó mới đến theo giai đoạn
     return PLANT_THRESHOLDS[plant]?.[stage]?.[sensor] || null;
   }
 
@@ -551,6 +780,40 @@ document.addEventListener('DOMContentLoaded', () => {
       recommendText.textContent = generateRecommendation(lastSensorData);
     }
   }
+
+  const plantType = document.getElementById("plantType");
+  const growthStage = document.getElementById("growthStage");
+
+  const stages = {
+    vegetable: [
+      { value: "seedling", text: "Nảy mầm – cây con" },
+      { value: "vegetative", text: "Sinh trưởng thân – lá" },
+      { value: "harvest", text: "Thu hoạch" }
+    ],
+    flower: [
+      { value: "seedling", text: "Nảy mầm – cây con" },
+      { value: "vegetative", text: "Sinh trưởng" },
+      { value: "flowering", text: "Ra hoa" }
+    ]
+  };
+
+  function updateGrowthStage() {
+    const type = plantType.value;
+    growthStage.innerHTML = "";
+
+    stages[type].forEach(stage => {
+      const option = document.createElement("option");
+      option.value = stage.value;
+      option.textContent = stage.text;
+      growthStage.appendChild(option);
+    });
+  }
+
+  // load mặc định
+  updateGrowthStage();
+
+  // khi đổi loại cây
+  plantType.addEventListener("change", updateGrowthStage);
 
   // ===================== SEND CODE TO ESP =====================
   function sendAlertCodesToESP(data) {

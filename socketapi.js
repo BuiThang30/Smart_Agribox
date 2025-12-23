@@ -85,7 +85,7 @@ function initSocket(server) {
               try {
                 const res = await fetch(api_endpoint);
                 const json = await res.json();
-                if (json?.data?.aqi) data.CO2 = json.data.aqi;
+                if (json?.data?.aqi) data.NOx = json.data.aqi;
               } catch (err) {
                 console.error("Failed to fetch AQI:", err.message);
               }
@@ -96,7 +96,7 @@ function initSocket(server) {
               try {
                 const res = await fetch(api_endpoint);
                 const json = await res.json();
-                if (json?.data?.aqi) data.CO2 = json.data.aqi;
+                if (json?.data?.aqi) data.CO = json.data.aqi;
               } catch (err) {
                 console.error("Failed to fetch AQI:", err.message);
               }
@@ -123,14 +123,15 @@ function initSocket(server) {
 
               db.run(
                 `INSERT INTO EnvironmentalData 
-                 (temperature, humidity, CO2, CO, NOx, N, P, K, "soil-temperature", "soil-moisture", PH)
-                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+                 (temperature, humidity, CO2, CO, NOx, SO2, N, P, K, "soil-temperature", "soil-moisture", PH)
+                 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
                 [
                   avgData.temperature,
                   avgData.humidity,
                   avgData.CO2,
                   avgData.CO,
                   avgData.NOx,
+                  avgData.SO2,
                   avgData.N,
                   avgData.P,
                   avgData.K,
